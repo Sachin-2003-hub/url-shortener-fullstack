@@ -75,5 +75,4 @@ npm install
 
 # Start the dev server
 npm run dev
-
-![Screenshot](<Screenshot (15).png>)
+![Project Demo Screenshot](./Screenshot (15).png)
