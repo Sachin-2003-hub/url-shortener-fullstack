@@ -10,13 +10,18 @@ function App() {
   const [statsCode, setStatsCode] = useState('');
   const [visits, setVisits] = useState(null); // null means "not checked yet"
   const [statsError, setStatsError] = useState('');
+  // Add this to your state variables
+const [loading, setLoading] = useState(false);
+const [success, setSuccess] = useState(false);
+
 
   // 1. Logic to Shorten URL
   const handleShorten = async (e) => {
     e.preventDefault();
     setShortenError('');
     setShortUrl('');
-
+    setLoading(true); // <--- START LOADING
+setSuccess(false); // <--- Reset success on new click
     try {
       const response = await fetch('http://localhost:8080/shorten', {
         method: 'POST',
@@ -31,8 +36,12 @@ function App() {
 
       const code = await response.text();
       setShortUrl(`http://localhost:8080/${code}`);
+      setSuccess(true); // <--- TURN ON GREEN MODE
     } catch (err) {
       setShortenError(err.message);
+    }
+    finally {
+      setLoading(false); // <--- STOP LOADING (Happens whether success or error)
     }
   };
 
@@ -80,11 +89,29 @@ function App() {
                     className="form-control" 
                     placeholder="Paste long URL here..." 
                     value={longUrl}
-                    onChange={(e) => setLongUrl(e.target.value)}
+                    onChange={(e) => {
+    setLongUrl(e.target.value);
+    setSuccess(false); // <--- Reset to Blue when user types
+}}
                     required
+                    disabled={loading} // <--- Disable input while loading
                   />
-                  <button className="btn btn-primary" type="submit">Shorten</button>
-                </div>
+                  <button 
+                    className="btn btn-primary" 
+                    type="submit" 
+                    disabled={loading} // <--- Disable button while loading
+                  >
+                    {loading ? (
+                      // Bootstrap Spinner
+                      <>
+                        <span className="spinner-border spinner-border-sm me-2" role="status" aria-hidden="true"></span>
+                        Shortening...
+                      </>
+                    ) : (
+                      "Shorten"
+                    )}
+                  </button>
+                   </div>
               </form>
 
               {shortenError && <div className="alert alert-danger">{shortenError}</div>}
