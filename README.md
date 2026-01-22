@@ -66,7 +66,9 @@ cd backend
 
 # Run the application
 mvn spring-boot:run
-
+```
+### 1. Setup Backend (Spring Boot)
+```bash
 # Navigate to frontend folder
 cd frontend
 
@@ -74,6 +76,7 @@ cd frontend
 npm install
 
 # Start the dev server
-npm run dev
 
-![Screenshot](<Screenshot (15).png>)
+npm run dev
+```
+![Project Demo Screenshot](./Screenshot(15).png)
