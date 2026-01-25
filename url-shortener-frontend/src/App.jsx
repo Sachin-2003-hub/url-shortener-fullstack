@@ -1,6 +1,8 @@
 import { useState } from 'react'
 
 function App() {
+
+  const BACKEND_URL = import.meta.env.VITE_BACKEND_URL || 'http://localhost:8080';
   // --- State for Shortening ---
   const [longUrl, setLongUrl] = useState('');
   const [shortUrl, setShortUrl] = useState('');
@@ -23,7 +25,7 @@ const [success, setSuccess] = useState(false);
     setLoading(true); // <--- START LOADING
 setSuccess(false); // <--- Reset success on new click
     try {
-      const response = await fetch('http://localhost:8080/shorten', {
+      const response = await fetch(`${BACKEND_URL}/shorten`, {
         method: 'POST',
         headers: { 'Content-Type': 'text/plain' },
         body: longUrl
@@ -35,7 +37,7 @@ setSuccess(false); // <--- Reset success on new click
       }
 
       const code = await response.text();
-      setShortUrl(`http://localhost:8080/${code}`);
+      setShortUrl(`${BACKEND_URL}/${code}`);
       setSuccess(true); // <--- TURN ON GREEN MODE
     } catch (err) {
       setShortenError(err.message);
@@ -52,14 +54,17 @@ setSuccess(false); // <--- Reset success on new click
     setVisits(null);
 
     // Helper: If user pastes full URL "http://localhost:8080/b", extract just "b"
-    let codeCleaned = statsCode.replace('http://localhost:8080/', '').trim();
+    let codeCleaned = statsCode
+      .replace(BACKEND_URL + '/', '') // Remove production URL
+      .replace('http://localhost:8080/', '') // Remove localhost URL (just in case)
+      .trim();
     if(codeCleaned === "") {
         setStatsError("Please enter a code");
         return;
     }
 
     try {
-      const response = await fetch(`http://localhost:8080/stats/${codeCleaned}`);
+      const response = await fetch(`${BACKEND_URL}/stats/${codeCleaned}`);
 
       if (!response.ok) {
         throw new Error('Short code not found');
