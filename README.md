@@ -82,17 +82,20 @@ Implemented **Bucket4j** (Token Bucket Algorithm) to prevent abuse and DDoS atta
 ### 1. Backend Setup
 ```bash
 # Clone the repository
-git clone https://github.com/Sachin-2003-hub/url-shortener-fullstack.git
-# Navigate to backend
-cd backend
+git clone [https://github.com/Sachin-2003-hub/url-shortener-fullstack.git](https://github.com/Sachin-2003-hub/url-shortener-fullstack.git)
+
+# Navigate to backend folder
+cd URLshortener/URLshortener
 
 # Install dependencies & Run
 mvn spring-boot:run
 ```
-### 1. Setup Backend (Spring Boot)
+### 1. Frontend Setup 
+
 ```bash
+#Open a new terminal window (keep the backend running) and:
 # Navigate to frontend folder
-cd frontend
+cd url-shortener-frontend
 
 # Install dependencies
 npm install
