@@ -1,70 +1,93 @@
-# 🔗 Full Stack URL Shortener
+# 🚀 LinkLifter - Distributed URL Shortener Service
 
-A scalable URL shortening service built with **Java Spring Boot** (Backend) and **React** (Frontend).
-This project demonstrates key System Design concepts including **Base62 Encoding**, **Layered Architecture**, and **Database Persistence**.
+A production-ready, full-stack URL shortening service engineered for scalability and performance.
+Built with **Java Spring Boot** and **React**, deployed as decoupled microservices using **Docker** containers on a cloud architecture.
 
-![Project Status](https://img.shields.io/badge/status-active-success)
-![Java](https://img.shields.io/badge/Java-17%2B-orange)
-![Spring Boot](https://img.shields.io/badge/Spring%20Boot-3.x-green)
-![React](https://img.shields.io/badge/React-18-blue)
+[![Live Demo](https://img.shields.io/badge/Live_Demo-Visit_App-blue?style=for-the-badge&logo=vercel)](https://url-shortener-fullstack-three.vercel.app/)
+[![Status](https://img.shields.io/badge/Status-Active-success?style=flat-square)]()
 
-## 🏗 System Architecture
-
-The application follows a clean **MVC (Model-View-Controller)** architecture to ensure separation of concerns:
-
-* **Controller Layer:** Handles HTTP requests (REST API).
-* **Service Layer:** Contains business logic (Base62 conversion, Input Validation).
-* **Repository Layer:** Manages database interactions (JPA/Hibernate).
-* **Database:** H2 (In-Memory) or MySQL for persistent storage.
-
-### Core Algorithm: Base62
-Instead of random strings, this system uses **Base62 Encoding** on the database Auto-Increment ID.
-* ID `100` -> Short Code `b8`
-* Guarantees uniqueness (no collisions).
-* Optimized for URL-safe characters (`a-z`, `A-Z`, `0-9`).
+![Java](https://img.shields.io/badge/Java-17%2B-orange?logo=openjdk)
+![Spring Boot](https://img.shields.io/badge/Spring%20Boot-3.2-green?logo=springboot)
+![React](https://img.shields.io/badge/React-18-blue?logo=react)
+![Docker](https://img.shields.io/badge/Docker-Enabled-2496ED?logo=docker)
+![MySQL](https://img.shields.io/badge/Database-TiDB_Cloud-4479A1?logo=mysql)
 
 ---
 
-## 🚀 Features
+## 🖼️ Project Demo
+![Application Screenshot](image.png)
+*The modern Glassmorphism UI ensuring a premium user experience.*
 
-* **Shorten URLs:** Convert long links into compact, shareable codes.
-* **Redirection:** Instant 302 redirection to the original URL.
-* **Analytics:** Track total clicks for every link.
-* **Validation:** Prevents invalid URL formats and handles 404 errors gracefully.
-* **CORS Enabled:** Seamless integration between React and Spring Boot.
+---
+
+## 🏗 System Architecture
+
+The application transitions from a monolithic design to a **Decoupled Cloud Architecture**:
+
+* **Frontend:** React + Vite hosted on **Vercel's Edge Network**.
+* **Backend:** Spring Boot REST API containerized with **Docker** and hosted on **Render**.
+* **Database:** Serverless **TiDB (MySQL)** cluster for high-availability persistence.
+* **Security:** IP-based **Rate Limiting** (Bucket4j) and CORS configuration.
+
+### 🧩 Core Algorithm: Base62
+We utilize **Base62 Encoding** to generate short, URL-safe aliases from database IDs.
+* **Collision-Free:** Mathematically guaranteed uniqueness.
+* **Performance:** `O(1)` complexity for encoding/decoding.
+* **Scale:** Can generate 3,500 trillion unique combinations with just 7 characters.
+
+---
+
+## 🚀 Key Features
+
+### 🛡️ 1. API Rate Limiting (Security)
+Implemented **Bucket4j** (Token Bucket Algorithm) to prevent abuse and DDoS attacks.
+* **Limit:** 10 requests per minute per IP address.
+* **Response:** Returns `429 Too Many Requests` with a "Retry-After" header if exceeded.
+
+### ⚡ 2. High-Performance Redirection
+* Optimized database indexing ensures **sub-100ms** lookup times.
+* Validates URL syntax and checks for "HTTP/HTTPS" protocols automatically.
+
+### 📊 3. Analytics & Tracking
+* Tracks total **Click Counts** for every generated link.
+* Stores visit data persistently in the cloud database.
+
+### 🎨 4. Modern UI/UX
+* **Glassmorphism Design:** Custom CSS gradients and blur effects.
+* **Clipboard Integration:** One-click copy functionality.
+* **Responsive:** Fully mobile-optimized layout.
 
 ---
 
 ## 🛠️ Tech Stack
 
-### Backend
-* **Language:** Java
-* **Framework:** Spring Boot (Web, Data JPA)
-* **Database:** H2 (Dev) / MySQL (Prod)
-* **Build Tool:** Maven
-
-### Frontend
-* **Library:** React.js (Vite)
-* **Styling:** Bootstrap 5
-* **HTTP Client:** Fetch API
+| Component | Technology |
+| :--- | :--- |
+| **Backend** | Java 17, Spring Boot 3, Spring Data JPA |
+| **Frontend** | React.js, Vite, Bootstrap 5 (Custom CSS) |
+| **Database** | MySQL (TiDB Serverless Cloud) |
+| **Security** | Bucket4j (Rate Limiter), CORS Policies |
+| **DevOps** | Docker, Render (Cloud PaaS), Vercel |
+| **Tools** | Maven, Postman, Git |
 
 ---
 
-## ⚙️ Getting Started
+## ⚙️ Getting Started (Run Locally)
 
 ### Prerequisites
-* Java 17 or higher
+* Java 17+
 * Node.js & npm
+* MySQL (or use H2 in-memory)
 
-### 1. Setup Backend (Spring Boot)
+### 1. Backend Setup
 ```bash
 # Clone the repository
-git clone [https://github.com/YOUR_USERNAME/url-shortener.git](https://github.com/YOUR_USERNAME/url-shortener.git)
+git clone [\[https://github.com/\](https://github.com/)Sachin-2003-hub/url-shortener-fullstack.git](https://github.com/Sachin-2003-hub/url-shortener-fullstack.git)
 
 # Navigate to backend
 cd backend
 
-# Run the application
+# Install dependencies & Run
 mvn spring-boot:run
 ```
 ### 1. Setup Backend (Spring Boot)
@@ -79,4 +102,15 @@ npm install
 
 npm run dev
 ```
-![Project Demo Screenshot](./Screenshot(15).png)
+## 🔌 API Documentation
+
+| Method | Endpoint | Description |
+| :--- | :--- | :--- |
+| `POST` | `/shorten` | Accepts a raw URL string and returns the short ID. **(Rate Limited)** |
+| `GET` | `/{shortCode}` | Redirects the user to the original URL. |
+| `GET` | `/stats/{shortCode}` | Returns the total click count (Long). |
+
+## 👨‍💻 Author
+**Sachin [Last Name]**
+* [LinkedIn]([https://www.linkedin.com/in/sachin-link/](https://www.linkedin.com/in/sachin-chaurasiya-833788228/))
+* [GitHub](https://github.com/Sachin-2003-hub)
