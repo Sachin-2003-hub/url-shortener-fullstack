@@ -82,7 +82,7 @@ Implemented **Bucket4j** (Token Bucket Algorithm) to prevent abuse and DDoS atta
 ### 1. Backend Setup
 ```bash
 # Clone the repository
-git clone [\[https://github.com/\](https://github.com/)Sachin-2003-hub/url-shortener-fullstack.git](https://github.com/Sachin-2003-hub/url-shortener-fullstack.git)
+git clone [https://github.com/](https://github.com/)[Sachin-2003-hub]/url-shortener-fullstack.git
 
 # Navigate to backend
 cd backend
@@ -112,5 +112,5 @@ npm run dev
 
 ## 👨‍💻 Author
 **Sachin [Last Name]**
-* [LinkedIn]([https://www.linkedin.com/in/sachin-link/](https://www.linkedin.com/in/sachin-chaurasiya-833788228/))
+* [LinkedIn](https://www.linkedin.com/in/sachin-chaurasiya-833788228/)
 * [GitHub](https://github.com/Sachin-2003-hub)
