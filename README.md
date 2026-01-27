@@ -113,6 +113,6 @@ npm run dev
 | `GET` | `/stats/{shortCode}` | Returns the total click count (Long). |
 
 ## 👨‍💻 Author
-**Sachin [Last Name]**
+**Sachin Chaurasiya**
 * [LinkedIn](https://www.linkedin.com/in/sachin-chaurasiya-833788228/)
 * [GitHub](https://github.com/Sachin-2003-hub)
