@@ -82,7 +82,7 @@ Implemented **Bucket4j** (Token Bucket Algorithm) to prevent abuse and DDoS atta
 ### 1. Backend Setup
 ```bash
 # Clone the repository
-git clone https://github.com/Sachin-2003-hub/url-shortener.git
+git clone https://github.com/Sachin-2003-hub/url-shortener-fullstack.git
 # Navigate to backend
 cd backend
 
